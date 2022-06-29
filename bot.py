@@ -61,16 +61,6 @@ def welcome(message):
     state[message.chat.id] = "default"
 
 
-@bot.message_handler(commands=['start_send_order'])
-def start_send_order(message):
-    # chat_id = message.chat.id
-    # file = open("id.txt", "w")
-    # file.write(str(chat_id))
-    # file.close()
-    last_time = time.time()
-    send_message(20)
-
-
 @bot.message_handler(commands=['help'])
 def help(message):
     bot.send_message(message.chat.id,
