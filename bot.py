@@ -2,7 +2,6 @@ import requests
 import telebot
 import config
 from telebot import types
-import time
 
 
 
@@ -218,7 +217,6 @@ def callback_inline(call):
 
 def get_product():
     products = requests.get("https://hookah-batumi.herokuapp.com/set_products").json()
-    print(products)
     return products
 
 
