@@ -42,7 +42,7 @@ def create_keyboard():
 
 def create_keyboard_products():
     products = get_product()
-    items = ["Выберите что-нибудь сами"]
+    items = [types.InlineKeyboardButton("Выберите что-нибудь сами", callback_data="Выберите что-нибудь сами")]
     for el in products:
         items.append(types.InlineKeyboardButton(products[el]["name"], callback_data=products[el]["name"]))
     markup = types.InlineKeyboardMarkup(row_width=2)
