@@ -42,7 +42,7 @@ def create_keyboard():
 
 def create_keyboard_products():
     products = get_product()
-    items = []
+    items = ["Выберите что-нибудь сами"]
     for el in products:
         items.append(types.InlineKeyboardButton(products[el]["name"], callback_data=products[el]["name"]))
     markup = types.InlineKeyboardMarkup(row_width=2)
@@ -92,8 +92,8 @@ def main_send(message):
 
                 elif message.text == 'Посмотреть товары 📦':
                     products = get_product()
-                    message_products = ''
-                    k = 1
+                    message_products = "1) Выберите что-нибудь сами\n"
+                    k = 2
                     for el in products:
                         message_products += str(k) + ") " + products[el]["name"] + "\n"
                         k += 1
@@ -115,7 +115,7 @@ def main_send(message):
                 order[message.chat.id]["comment"] = message.text
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 item1 = types.InlineKeyboardButton("Паспорт 📕", callback_data="паспорт")
-                item2 = types.InlineKeyboardButton("100$ 💵", callback_data="100$")
+                item2 = types.InlineKeyboardButton("100$ 💵", callback_data="300₾ или 100$")
                 markup.add(item1, item2)
                 bot.send_message(message.chat.id, questions["deposit"], reply_markup=markup)
             elif order[message.chat.id]["deposit"] == "":
@@ -140,12 +140,12 @@ def main_send(message):
 def callback_inline(call):
     global state
     products = get_product()
-    products_list = []
+    products_list = ["Выберите что-нибудь сами"]
     for el in products:
         products_list.append(products[el]["name"])
     try:
         if call.message:
-            if call.data == "паспорт" or call.data == "100$":
+            if call.data == "паспорт" or call.data == "300₾ или 100$":
                 order[call.message.chat.id]["deposit"] = call.data
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=call.message.text, reply_markup=None)
                 bot.send_message(call.message.chat.id, "В залог будет оставлен: " + call.data)
